@@ -91,9 +91,9 @@ for i, (name, delta) in enumerate(sorted(longestDeltas.items(), key = lambda x :
     if s[13] == ":": s = f"{s[:12]}0{s[12:]}"
     print(s)
 
-print("[/code]\n[b]The Shortest Wait:[/b] (Minutes:Seconds)\n[code]")
+print("[/code]\n[b]The Shortest Wait:[/b] (Hours:Minutes:Seconds)\n[code]")
 
 for i, (name, delta) in enumerate(sorted(shortestDeltas.items(), key = lambda x : x[1])[:10], start=1):
     #Print index (starting at 1), time duration and username.
-    print(f"{i}. {str(timedelta(seconds=delta))[3:]} - {name}")
+    print(f"{i}. {str(timedelta(seconds=delta))} - {name}")
 print("[/code]")
