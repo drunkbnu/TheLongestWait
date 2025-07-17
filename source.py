@@ -11,7 +11,7 @@ r = Request(url=url, headers={'User-Agent': 'Mozilla/5.0'})
 nextPageRegex = '(?<=<a rel="next" href="viewtopic.php\?id=47849&amp;p=)\d+(?=">Next<\/a>)'
 
 #For matching timestamps.
-regexTimeLookBehind = '(?<=<a href="viewtopic.php\?pid=\d{6}#p\d{6}">' #Positive lookbehind.
+regexTimeLookBehind = '(?<=<a href="viewtopic.php\?id=47849&p=\d#p\d{6}">' #Positive lookbehind.
 regexTimeLookAhead = "(?=<\/a>)" #Positive lookahead.
 regexDate = "\d{4}-\d{2}-\d{2}" #YYYY-MM-DD
 regexTime = "\d{2}:\d{2}:\d{2}" #HH:MM:SS
@@ -81,19 +81,19 @@ for i in range(1, len(posts)):
     if (name not in shortestDeltas or delta < shortestDeltas[name]) and name != posts[i-1][1]:
         shortestDeltas[name] = delta
        
-print("[b]The Longest Wait[/b]\n[code]")
+print("[b]The Longest Wait:[/b]\n[code]")
 
 #Sort deltas descending and iterate resulting list of tuples.
-for i, (name, delta) in enumerate(sorted(longestDeltas.items(), key = lambda x : -x[1])[:5], start=1):
+for i, (name, delta) in enumerate(sorted(longestDeltas.items(), key = lambda x : -x[1])[:10], start=1):
     #Print index (starting at 1), time duration and username.
     s = f"{i}. {str(timedelta(seconds=delta))} - {name}"
     #Pad hours to 2 digits as lazily as possible.
     if s[13] == ":": s = f"{s[:12]}0{s[12:]}"
     print(s)
 
-print("[/code]\n[b]The Shortest Wait[/b] (Minutes:Seconds)\n[code]")
+print("[/code]\n[b]The Shortest Wait:[/b] (Minutes:Seconds)\n[code]")
 
-for i, (name, delta) in enumerate(sorted(shortestDeltas.items(), key = lambda x : x[1])[:5], start=1):
+for i, (name, delta) in enumerate(sorted(shortestDeltas.items(), key = lambda x : x[1])[:10], start=1):
     #Print index (starting at 1), time duration and username.
     print(f"{i}. {str(timedelta(seconds=delta))[3:]} - {name}")
 print("[/code]")
