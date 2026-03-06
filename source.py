@@ -8,13 +8,13 @@ html = ""
 r = Request(url=url, headers={'User-Agent': 'Mozilla/5.0'})
 
 #Match next page number in thread.
-nextPageRegex = '(?<=<a rel="next" href="viewtopic.php\?id=47849&amp;p=)\d+(?=">Next<\/a>)'
+nextPageRegex = r'(?<=<a rel="next" href="viewtopic.php\?id=47849&amp;p=)\d+(?=">Next<\/a>)'
 
 #For matching timestamps.
-regexTimeLookBehind = '(?<=<a href="viewtopic.php\?id=47849&p=\d#p\d{6}">' #Positive lookbehind.
-regexTimeLookAhead = "(?=<\/a>)" #Positive lookahead.
-regexDate = "\d{4}-\d{2}-\d{2}" #YYYY-MM-DD
-regexTime = "\d{2}:\d{2}:\d{2}" #HH:MM:SS
+regexTimeLookBehind = r'(?<=<a href="viewtopic.php\?id=47849&p=\d+#p\d+">' #Positive lookbehind.
+regexTimeLookAhead = r"(?=<\/a>)" #Positive lookahead.
+regexDate = r"\d{4}-\d{2}-\d{2}" #YYYY-MM-DD
+regexTime = r"\d{2}:\d{2}:\d{2}" #HH:MM:SS
 
 #Match YYYY-MM-DD HH:MM:SS of older posts.
 regexOlderPostTimestamp = f"{regexTimeLookBehind}){regexDate} {regexTime}{regexTimeLookAhead}"
@@ -25,7 +25,7 @@ regexTodayPostTimestamp = f"{regexTimeLookBehind}Today ){regexTime}{regexTimeLoo
 
 #Match username - one-word or two-word string between ">" and "</span>" AFTER timestamp.
 #May not work if username has more than one space.
-regexUsername = "(?<=>)\S+( \S+)?(?=<\/span>)"
+regexUsername = r"(?<=>)\S+( \S+)?(?=<\/span>)"
 
 posts = [] #List of tuples - [(timestamp, author), ...]
 
